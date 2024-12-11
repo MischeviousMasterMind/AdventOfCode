@@ -28,14 +28,17 @@ public class Day3 {
 			}
 			
 			int total = 0;
+			int index = 1;
 			
 			for(String line : list) {
 				
 				total += compute(line);
 				
 				System.out.println();
-				System.out.println("------------------- " + total);
+				System.out.println("[" + index + "] --------------- " + total);
 				System.out.println();
+				
+				index++;
 				
 			}
 			
@@ -81,16 +84,18 @@ public class Day3 {
 				
 				try {
 					total += Integer.parseInt(numbers[0]) * Integer.parseInt(numbers[1]);
+					
+					System.out.print("mul(" +  numbers[0] + "," + numbers[1] + ")");
+					
+					for(int i = 0; i < 20 - increments - 5; i++) System.out.print(" ");
+					
+					System.out.println(total);
+					
 				} catch(NumberFormatException e) {
-					break;
+					
+					System.out.println("BREAK!");
 				}
-				
-				System.out.print("mul(" +  numbers[0] + "," + numbers[1] + ")");
-				
-				for(int i = 0; i < 20 - increments - 5; i++) System.out.print(" ");
-				
-				System.out.println(total);
-				
+			
 			}
 			
 			line = line.substring(index);
