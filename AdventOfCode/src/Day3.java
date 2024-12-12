@@ -35,7 +35,7 @@ public class Day3 {
 				total += compute(line);
 				
 				System.out.println();
-				System.out.println("[" + index + "] --------------- " + total);
+				System.out.println("[" + index + "] ------------------------- " + total);
 				System.out.println();
 				
 				index++;
@@ -63,47 +63,75 @@ public class Day3 {
 		
 		while(line.contains("mul(") && index < line.length() - 4) {
 			
+			line = line.substring(index);
+			index = 0;
+			
+			boolean validFormat = true;
+			
 			int increments = 0;
 			
 			String data = "";
 			
 			index = line.indexOf("mul(") + 4;
 			
-			while(!line.substring(index, index + 1).equals(")") && increments < 7) {
+			while(!line.substring(index, index + 1).equals(")")) {
 				
 				data += line.substring(index, index + 1);
+				
+				try {
+					
+					Integer.parseInt(line.substring(index, index + 1));
+					
+				} catch (NumberFormatException e) {
+					
+					if(!line.substring(index, index + 1).equals(",")) {
+						
+						validFormat = false;
+						break;
+					}
+					
+				}
+				
 				index++;
 				increments++;
 				
-			}
+			}				
 			
-			if(data.contains(",")) {
-				
-				
-				String[] numbers = data.split(",");
-				
+			String[] numbers = data.split(",");
+			
+			if(validFormat){
 				try {
+					
 					total += Integer.parseInt(numbers[0]) * Integer.parseInt(numbers[1]);
+						
+				} catch(NumberFormatException | ArrayIndexOutOfBoundsException e) {
 					
-					System.out.print("mul(" +  numbers[0] + "," + numbers[1] + ")");
-					
-					for(int i = 0; i < 20 - increments - 5; i++) System.out.print(" ");
-					
-					System.out.println(total);
-					
-				} catch(NumberFormatException e) {
-					
-					System.out.println("BREAK!");
 				}
-			
 			}
 			
-			line = line.substring(index);
 			
 		}
+			
+			
 		
 		return total;
 		
 	}
 
+	public String clean(String string) {
+		
+		if(!string.contains("do()")) return "";
+		
+		while(string.contains("don't()")){
+			
+			if(!string.contains("do()")) break;
+			
+			string.substring();
+			
+		}
+		
+		return string;
+		
+	}
+	
 }
